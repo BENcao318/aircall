@@ -1,9 +1,40 @@
-import React from 'react'
-import Content from './Content'
+import axios from 'axios'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
+import Content from '../components/Content'
 
-const Tabs = () => {
-  const [openTab, setOpenTab] = React.useState('Inbox')
-  console.log(openTab)
+const client = axios.create({
+  baseURL: `${process.env.REACT_APP_API_URL}`,
+})
+
+export const UserContext = createContext({
+  calls: [],
+  setCalls: () => [],
+  isLoading: true,
+})
+
+const Home = () => {
+  const [openTab, setOpenTab] = useState('Inbox')
+  const [calls, setCalls] = useState()
+  const [isLoading, setLoading] = useState(true)
+  const value = useMemo(
+    () => ({ calls, setCalls, isLoading }),
+    [calls, setCalls, isLoading]
+  )
+
+  useEffect(() => {
+    client
+      .get(`/activities`)
+      .then((response) => {
+        setCalls([...response.data])
+        console.log(calls)
+        console.log(response.data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [setCalls])
+
   return (
     <>
       <div className="flex flex-wrap">
@@ -30,7 +61,7 @@ const Tabs = () => {
             <li className="-mb-px mr-2 last:mr-0 flex-auto text-center ">
               <a
                 className={
-                  'text-sm font-bold px-3 py-3 shadow-lg rounded-xl block leading-normal' +
+                  'text-sm font-bold px-3 py-3 shadow-lg rounded-xl block leading-normal ' +
                   (openTab === 'Archive'
                     ? 'text-white bg-purple-600'
                     : 'text-slate-800 bg-white')
@@ -46,11 +77,13 @@ const Tabs = () => {
               </a>
             </li>
           </ul>
-          <Content openTab={openTab} />
+          <UserContext.Provider value={value}>
+            <Content openTab={openTab} />
+          </UserContext.Provider>
         </div>
       </div>
     </>
   )
 }
 
-export default Tabs
+export default Home
