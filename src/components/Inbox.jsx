@@ -4,13 +4,13 @@ import Call from './Call'
 
 const Inbox = () => {
   const { calls, isLoading } = useContext(UserContext)
-  console.log(calls)
+
   return (
     <div className="">
       {isLoading && <div>Loading</div>}
       {!isLoading &&
         calls.map((call) => {
-          if (call.is_archived == false) {
+          if (!call.is_archived) {
             return <Call key={call.id} call={call} />
           }
         })}
