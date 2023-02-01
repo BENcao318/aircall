@@ -2,14 +2,11 @@ import axios from 'axios'
 import React, { createContext, useEffect, useMemo, useState } from 'react'
 import Content from '../components/Content'
 
-const client = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}`,
-})
-
 export const UserContext = createContext({
   calls: [],
   setCalls: () => [],
   isLoading: true,
+  setLoading: true,
 })
 
 const Home = () => {
@@ -17,23 +14,21 @@ const Home = () => {
   const [calls, setCalls] = useState()
   const [isLoading, setLoading] = useState(true)
   const value = useMemo(
-    () => ({ calls, setCalls, isLoading }),
-    [calls, setCalls, isLoading]
+    () => ({ calls, setCalls, isLoading, setLoading }),
+    [calls, setCalls, isLoading, setLoading]
   )
 
   useEffect(() => {
-    client
-      .get(`/activities`)
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/activities`)
       .then((response) => {
         setCalls([...response.data])
-        console.log(calls)
-        console.log(response.data)
         setLoading(false)
       })
       .catch((err) => {
         console.log(err)
       })
-  }, [setCalls])
+  }, [setCalls, setLoading, isLoading])
 
   return (
     <>
@@ -53,7 +48,7 @@ const Home = () => {
                   setOpenTab('Inbox')
                 }}
                 data-toggle="tab"
-                href="#"
+                href="#1"
               >
                 Inbox
               </a>
@@ -71,7 +66,7 @@ const Home = () => {
                   setOpenTab('Archive')
                 }}
                 data-toggle="tab"
-                href="#"
+                href="#1"
               >
                 Archive
               </a>

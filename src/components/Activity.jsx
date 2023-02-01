@@ -1,22 +1,22 @@
 import axios from 'axios'
 import { format } from 'date-fns'
 import React, { useContext } from 'react'
-import { MdUnarchive } from 'react-icons/md'
+import { MdArchive } from 'react-icons/md'
 import { toast } from 'react-toastify'
 import { convertSecToHrMinSec, determineCallLogo } from '../helpers/utils'
 import { UserContext } from '../pages/Home'
 
-const Archive = ({ call }) => {
+const Activity = ({ call }) => {
   const timeCalled = format(Date.parse(call.created_at), 'PPpp')
   const { setLoading } = useContext(UserContext)
 
   const handleClick = () => {
     axios
       .patch(`${process.env.REACT_APP_API_URL}/activities/${call.id}`, {
-        is_archived: false,
+        is_archived: true,
       })
       .then((response) => {
-        toast.success('Archive had been updated.', {
+        toast.success('Call had been updated.', {
           position: 'bottom-center',
           autoClose: 3600,
           hideProgressBar: false,
@@ -28,7 +28,7 @@ const Archive = ({ call }) => {
       })
       .catch((err) => {
         console.log(err)
-        toast.error('Error updating archive.', {
+        toast.error('Error updating call.', {
           position: 'bottom-center',
           autoClose: 3600,
           hideProgressBar: false,
@@ -64,11 +64,11 @@ const Archive = ({ call }) => {
       </div>
 
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:z-30 group-hover:block text-purple-800 text-3xl font-bold flex items-center justify-center uppercase w-full">
-        <MdUnarchive size="2.6rem" className="inline mx-6 text-purple-800" />
-        Click to unarchive
+        <MdArchive size="2.6rem" className="inline mx-6 text-purple-800" />
+        Click to archive
       </div>
     </div>
   )
 }
 
-export default Archive
+export default Activity

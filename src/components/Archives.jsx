@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../pages/Home'
-import Activity from './Activity'
+import Call from './Activity'
+import Archive from './Archive'
 
-const Inbox = () => {
+const Archives = () => {
   const { calls, isLoading } = useContext(UserContext)
 
   return (
@@ -10,12 +11,12 @@ const Inbox = () => {
       {isLoading && <div>Loading</div>}
       {!isLoading &&
         calls.map((call) => {
-          if (!call.is_archived) {
-            return <Activity key={call.id} call={call} />
+          if (call.is_archived) {
+            return <Archive key={call.id} call={call} />
           }
         })}
     </div>
   )
 }
 
-export default Inbox
+export default Archives
