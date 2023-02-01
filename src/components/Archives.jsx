@@ -5,15 +5,17 @@ import Archive from './Archive'
 const Archives = () => {
   const { calls, isLoading } = useContext(UserContext)
 
+  const filterArchievedCalls = (calls) => {
+    return calls.filter((call) => call.is_archived === true)
+  }
+
   return (
     <div className="">
       {isLoading && <div>Loading</div>}
       {!isLoading &&
-        calls.map((call) => {
-          if (call.is_archived) {
-            return <Archive key={call.id} call={call} />
-          }
-        })}
+        filterArchievedCalls(calls).map((call) => (
+          <Archive key={call.id} call={call} />
+        ))}
     </div>
   )
 }
