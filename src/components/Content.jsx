@@ -1,5 +1,5 @@
 import React from 'react'
-import Archive from './Archive'
+import Archives from './Archives'
 import Inbox from './Inbox'
 
 const Content = ({ openTab }) => {
@@ -8,7 +8,7 @@ const Content = ({ openTab }) => {
       <div className="px-4 py-5 flex-auto">
         <div className="tab-content tab-space">
           {openTab === 'Inbox' && <Inbox />}
-          {openTab === 'Archive' && <Archive />}
+          {openTab === 'Archive' && <Archives />}
         </div>
       </div>
     </div>
