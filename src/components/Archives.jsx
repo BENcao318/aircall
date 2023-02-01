@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../pages/Home'
-import Call from './Activity'
 import Archive from './Archive'
 
 const Archives = () => {
