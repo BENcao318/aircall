@@ -15,7 +15,7 @@ const Activity = ({ call }) => {
       .patch(`${process.env.REACT_APP_API_URL}/activities/${call.id}`, {
         is_archived: true,
       })
-      .then((response) => {
+      .then(() => {
         toast.success('Call had been updated.', {
           position: 'bottom-center',
           autoClose: 3600,
