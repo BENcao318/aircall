@@ -64,7 +64,6 @@ export const convertSecToHrMinSec = (sec) => {
           .toString()
           .padStart(2, '0')
       : 0
-
   return (
     (hours !== 0 ? hours + ':' : '') +
     (minutes + ':') +
