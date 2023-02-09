@@ -48,7 +48,7 @@ const Home = () => {
                   setOpenTab('Inbox')
                 }}
                 data-toggle="tab"
-                href="#1"
+                href="#6"
               >
                 Inbox
               </a>
@@ -66,7 +66,7 @@ const Home = () => {
                   setOpenTab('Archive')
                 }}
                 data-toggle="tab"
-                href="#1"
+                href="#6"
               >
                 Archive
               </a>
