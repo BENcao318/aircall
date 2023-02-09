@@ -20,7 +20,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/activities`)
+      .get(`${process.env.REACT_APP_API_URL}activities`)
       .then((response) => {
         setCalls([...response.data])
         setLoading(false)
