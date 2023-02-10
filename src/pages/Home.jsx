@@ -20,7 +20,6 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      // .get(`${process.env.REACT_APP_API_URL}/activities`)
       .get(
         `https://charming-bat-singlet.cyclic.app/https://cerulean-marlin-wig.cyclic.app/activities`
       )
