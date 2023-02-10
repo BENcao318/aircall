@@ -1,9 +1,12 @@
-import axios from 'axios'
 import { format } from 'date-fns'
 import React, { useContext } from 'react'
 import { MdArchive } from 'react-icons/md'
 import { toast } from 'react-toastify'
-import { convertSecToHrMinSec, determineCallLogo } from '../helpers/utils'
+import {
+  convertSecToHrMinSec,
+  determineCallLogo,
+  serverAPI,
+} from '../helpers/utils'
 import { UserContext } from '../pages/Home'
 
 const Activity = ({ call }) => {
@@ -11,13 +14,10 @@ const Activity = ({ call }) => {
   const { setLoading } = useContext(UserContext)
 
   const handleClick = () => {
-    axios
-      .patch(
-        `https://charming-bat-singlet.cyclic.app/https://cerulean-marlin-wig.cyclic.app/activities/${call.id}`,
-        {
-          is_archived: true,
-        }
-      )
+    serverAPI
+      .patch(`/activities/${call.id}`, {
+        is_archived: true,
+      })
       .then(() => {
         toast.success('Call had been updated.', {
           position: 'bottom-center',

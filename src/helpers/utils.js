@@ -4,6 +4,7 @@ import {
   BsFillTelephoneOutboundFill,
   BsVoicemail,
 } from 'react-icons/bs'
+import axios from 'axios'
 
 export const determineCallLogo = (callType, direction) => {
   switch (true) {
@@ -70,3 +71,27 @@ export const convertSecToHrMinSec = (sec) => {
     (seconds || (Number(minutes) !== 0) !== false ? seconds : '')
   )
 }
+
+const getBaseUrl = () => {
+  let url
+  switch (process.env.NODE_ENV) {
+    case 'production':
+      url =
+        'https://charming-bat-singlet.cyclic.app/https://cerulean-marlin-wig.cyclic.app'
+      break
+    case 'development':
+    default:
+      url =
+        'https://charming-bat-singlet.cyclic.app/https://cerulean-marlin-wig.cyclic.app'
+  }
+
+  return url
+}
+
+export const serverAPI = axios.create({
+  baseURL: getBaseUrl(),
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+  },
+})
