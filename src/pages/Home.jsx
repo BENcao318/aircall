@@ -21,7 +21,12 @@ const Home = () => {
   useEffect(() => {
     axios
       .get(
-        `https://charming-bat-singlet.cyclic.app/https://cerulean-marlin-wig.cyclic.app/activities`
+        'https://charming-bat-singlet.cyclic.app/https://cerulean-marlin-wig.cyclic.app/activities',
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
       )
       .then((response) => {
         setCalls([...response.data])
