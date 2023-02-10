@@ -12,9 +12,12 @@ const Activity = ({ call }) => {
 
   const handleClick = () => {
     axios
-      .patch(`${process.env.REACT_APP_API_URL}/activities/${call.id}`, {
-        is_archived: true,
-      })
+      .patch(
+        `https://charming-bat-singlet.cyclic.app/https://cerulean-marlin-wig.cyclic.app/activities/${call.id}`,
+        {
+          is_archived: true,
+        }
+      )
       .then(() => {
         toast.success('Call had been updated.', {
           position: 'bottom-center',
